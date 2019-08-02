@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Reception List</title>
+</head>
+<body>
+<p>
+    <a href="/create-receptionist">Create New Receptionist</a>
+</p>
+<h1>Reception List</h1>
+<form>
+    <label>Search by name:</label>
+    <input type="text" name="search">
+    <input type="submit" value="Search">
+</form>
+<br>
+<table border="1px">
+    <tr>
+        <td>ID</td>
+        <td>Name</td>
+        <td>Age</td>
+        <td>Address</td>
+        <td>Hobby</td>
+        <td>Avatar</td>
+        <td>Edit</td>
+        <td>Delete</td>
+        <td>View</td>
+    </tr>
+    <th:block th:each="receptionist:${receptionists}">
+        <tr>
+            <td th:text="${receptionist.id}"></td>
+            <td th:text="${receptionist.name}"></td>
+            <td th:text="${receptionist.age}"></td>
+            <td th:text="${receptionist.address}"></td>
+            <td th:text="${receptionist.hobby}"></td>
+            <td><img width="150px" height="200px" th:src="@{'/image/' + ${receptionist.avatar}}"></td>
+            <td><a th:href="@{/edit-receptionist/__${receptionist.id}__}">edit</a></td>
+            <td><a th:href="@{/delete-receptionist/__${receptionist.id}__}">delete</a></td>
+            <td><a th:href="@{/view-receptionist/__${receptionist.id}__}">view</a></td>
+        </tr>
+    </th:block>
+</table>
+</body>
+</html>
